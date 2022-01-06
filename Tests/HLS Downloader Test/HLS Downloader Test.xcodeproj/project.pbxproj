@@ -13,6 +13,7 @@
 		84026A3627868FC90052DBE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84026A3427868FC90052DBE4 /* Main.storyboard */; };
 		84026A3827868FCB0052DBE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84026A3727868FCB0052DBE4 /* Assets.xcassets */; };
 		84026A3B27868FCB0052DBE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84026A3927868FCB0052DBE4 /* LaunchScreen.storyboard */; };
+		84026A5827869B0B0052DBE4 /* HLS Downloader in Frameworks */ = {isa = PBXBuildFile; productRef = 84026A5727869B0B0052DBE4 /* HLS Downloader */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +25,7 @@
 		84026A3727868FCB0052DBE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84026A3A27868FCB0052DBE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84026A3C27868FCB0052DBE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84026A52278698AA0052DBE4 /* HLS Downloader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "HLS Downloader"; path = ../..; sourceTree = "<group>"; };
+		84026A5527869AB60052DBE4 /* HLS Downloader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "HLS Downloader"; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84026A5827869B0B0052DBE4 /* HLS Downloader in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +46,7 @@
 				84026A4C278695700052DBE4 /* Packages */,
 				84026A2D27868FC90052DBE4 /* HLS Downloader Test */,
 				84026A2C27868FC90052DBE4 /* Products */,
+				84026A5627869B0B0052DBE4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,9 +75,16 @@
 		84026A4C278695700052DBE4 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				84026A52278698AA0052DBE4 /* HLS Downloader */,
+				84026A5527869AB60052DBE4 /* HLS Downloader */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		84026A5627869B0B0052DBE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +104,7 @@
 			);
 			name = "HLS Downloader Test";
 			packageProductDependencies = (
+				84026A5727869B0B0052DBE4 /* HLS Downloader */,
 			);
 			productName = "HLS Downloader Test";
 			productReference = 84026A2B27868FC90052DBE4 /* HLS Downloader Test.app */;
@@ -374,6 +385,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		84026A5727869B0B0052DBE4 /* HLS Downloader */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "HLS Downloader";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 84026A2327868FC90052DBE4 /* Project object */;
 }

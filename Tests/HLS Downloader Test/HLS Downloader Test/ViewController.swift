@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import HLS_Downloader
 import Combine
+import HLS_Downloader
 
 class ViewController: UIViewController {
     var cancelables = Set<AnyCancellable>()
@@ -15,9 +15,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        // Do any additional setup after loading the view.
-        UserDefaults.standard.removeObject(forKey: "downloadedFilesKey")
 
         let hlsFile = HLSFile(url: URL(string: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8")!)
         hlsFile.fileStatusPublisher.sink { status in
