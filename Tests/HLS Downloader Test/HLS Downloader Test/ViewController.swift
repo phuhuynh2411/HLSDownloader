@@ -6,12 +6,15 @@
 //
 
 import UIKit
-import HLSDownlaoder
+import HLS_Downloader
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        let hlsFile = HLSFile(url: URL(string: "")!)
+        hlsFile.download()
     }
 }

@@ -24,7 +24,7 @@ public class HLSFile {
     let url: URL
     private var cancelables = Set<AnyCancellable>()
 
-    init(
+    public init(
         url: URL,
         fileDownloader: HLSDownloaderSession = .fileUserDefault,
         fileUserDefault: FileUserDefault = .shared

@@ -9,17 +9,17 @@ import Foundation
 import AVFoundation
 
 /// Manage the downloaded video in the user's device
-class DownloadFileManager: DownloadFileManagerInterface {
+public class DownloadFileManager: DownloadFileManagerInterface {
     private let fileManager: FileManager
 
-    init(fileManager: FileManager = .default) {
+    public init(fileManager: FileManager = .default) {
         self.fileManager = fileManager
     }
 
     /// Returns `AVURLAsset` if the file was downloaded; otherwise `nil`
     /// - Parameter url: a url with a relative path to the file on user's device
     /// - Returns: `nil` or `AVURLAsset`
-    func fileLocation(from url: URL) -> AVURLAsset? {
+    public func fileLocation(from url: URL) -> AVURLAsset? {
         let baseURL = URL(fileURLWithPath: NSHomeDirectory())
         let assetURL = baseURL.appendingPathComponent(url.relativePath)
 
@@ -35,7 +35,7 @@ class DownloadFileManager: DownloadFileManagerInterface {
 
     /// Deletes a file at the url relative path
     /// - Parameter url: a url with a relative path to the file on user's device
-    func deleteFile(at url: URL) throws {
+    public func deleteFile(at url: URL) throws {
         let baseURL = URL(fileURLWithPath: NSHomeDirectory())
         let assetURL = baseURL.appendingPathComponent(url.relativePath)
         if fileManager.fileExists(atPath: assetURL.path) {
@@ -45,7 +45,7 @@ class DownloadFileManager: DownloadFileManagerInterface {
     }
 }
 
-protocol DownloadFileManagerInterface {
+public protocol DownloadFileManagerInterface {
     func fileLocation(from url: URL) -> AVURLAsset?
     func deleteFile(at url: URL) throws
 }

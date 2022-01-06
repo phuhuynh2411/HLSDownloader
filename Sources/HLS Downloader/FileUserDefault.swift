@@ -46,7 +46,7 @@ public class FileUserDefault: DownloadFileManagerInterface {
     /// Returns an `AVURLAsset`
     /// - Parameter url: the url returned from the server
     /// - Returns: an `AVURLAsset` if the file has been downloaded and contains in the dictionary or `nil`
-    func fileLocation(from url: URL) -> AVURLAsset? {
+    public func fileLocation(from url: URL) -> AVURLAsset? {
 
         guard let filePath = downloadedFiles[url.absoluteString] else { return nil }
         let fileURL = URL(fileURLWithPath: filePath)
@@ -55,7 +55,7 @@ public class FileUserDefault: DownloadFileManagerInterface {
 
     /// Delete a file at url
     /// - Parameter url: the url returned from the server
-    func deleteFile(at url: URL) throws {
+    public func deleteFile(at url: URL) throws {
         guard let filePath = downloadedFiles[url.absoluteString] else { return }
         let fileURL = URL(fileURLWithPath: filePath)
         try matchFileManager.deleteFile(at: fileURL)
@@ -70,7 +70,7 @@ public class FileUserDefault: DownloadFileManagerInterface {
 
 // MARK: - HLSDownloaderInterface
 extension FileUserDefault: HLSDownloaderInterface {
-    func urlSession(_ session: URLSession, assetDownloadTask: AVAssetDownloadTask, didFinishDownloadingTo location: URL, original url: URL) {
+    public func urlSession(_ session: URLSession, assetDownloadTask: AVAssetDownloadTask, didFinishDownloadingTo location: URL, original url: URL) {
         append(location: location, url: url)
     }
 }

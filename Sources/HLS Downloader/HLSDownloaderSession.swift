@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 
 /// A HLSDownloader session
-class HLSDownloaderSession: NSObject {
+public class HLSDownloaderSession: NSObject {
     /// The background identifier
     private let downloadIndentifier = "filesoft.co.background"
     /// A notification center
@@ -19,7 +19,7 @@ class HLSDownloaderSession: NSObject {
 
     public static let shared = HLSDownloaderSession()
 
-    let fileManager: DownloadFileManagerInterface
+    public let fileManager: DownloadFileManagerInterface
 
     public init(
         notification: NotificationCenter = .default,

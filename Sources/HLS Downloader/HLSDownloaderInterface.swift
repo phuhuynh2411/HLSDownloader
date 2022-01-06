@@ -8,6 +8,6 @@
 import Foundation
 import AVFoundation
 
-protocol HLSDownloaderInterface {
+public protocol HLSDownloaderInterface {
     func urlSession(_ session: URLSession, assetDownloadTask: AVAssetDownloadTask, didFinishDownloadingTo location: URL, original url: URL)
 }
