@@ -14,7 +14,7 @@ public enum FileStatus {
 }
 
 public class HLSFile {
-    let fileStatusPublisher = CurrentValueSubject<FileStatus, Never>(.unspecified)
+    public let fileStatusPublisher = CurrentValueSubject<FileStatus, Never>(.unspecified)
     let fileDownloader: HLSDownloaderSession
     let fileUserDefault: FileUserDefault
 
