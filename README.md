@@ -41,3 +41,7 @@ hlsFile.resume()
 ```swift
 hlsFile.cancel()
 ```
+## Notes
+At the time of writting this library, the above functions do NOT work on simulator. You would get an unknown error below.
+`Error: The operation couldn’t be completed. (NSURLErrorDomain error -1.)`
+ It will work fine on the real device.
