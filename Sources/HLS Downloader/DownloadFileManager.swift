@@ -23,12 +23,16 @@ public class DownloadFileManager: DownloadFileManagerInterface {
         let baseURL = URL(fileURLWithPath: NSHomeDirectory())
         let assetURL = baseURL.appendingPathComponent(url.relativePath)
 
-        let asset = AVURLAsset(url: assetURL)
-        if let cache = asset.assetCache, cache.isPlayableOffline {
-            // Set up player item and player and begin playback
-            return asset
+        if fileManager.fileExists(atPath: assetURL.path) {
+            let asset = AVURLAsset(url: assetURL)
+            if let cache = asset.assetCache, cache.isPlayableOffline {
+                // Set up player item and player and begin playback
+                return asset
+            } else {
+                // Present Error: No playable version of this asset exists offline
+                return nil
+            }
         } else {
-            // Present Error: No playable version of this asset exists offline
             return nil
         }
     }
