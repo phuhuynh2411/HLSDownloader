@@ -199,7 +199,7 @@ extension HLSDownloaderSession: AVAssetDownloadDelegate {
 
         // If the task was completed with an error,
         // delete the partial download file
-        if assetDownloadTask.error != nil {
+        if assetDownloadTask.error != nil || assetDownloadTask.state == .canceling {
             do {
                 let fileURL = URL(fileURLWithPath: location.relativePath)
                 try fileManager.deleteFile(at: fileURL)
