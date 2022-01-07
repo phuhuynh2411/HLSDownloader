@@ -19,10 +19,12 @@ public class HLSFile {
     let fileUserDefault: FileUserDefault
 
     public typealias CompletionClosure = (_ success: Bool) -> Void
+    public typealias StatusClosure = (_ status: FileStatus) -> Void
 
     /// A URL from the server. It will be used to downloaded the file
     let url: URL
     private var cancelables = Set<AnyCancellable>()
+    private(set) var lastDownloadedPercent: Double = 0.0
 
     public init(
         url: URL,
@@ -33,11 +35,11 @@ public class HLSFile {
         self.fileDownloader = fileDownloader
         self.fileUserDefault = fileUserDefault
         // Load the status of the match file
-        fileStatusPublisher.send(matchStatus())
+        fileStatusPublisher.send(anotherStatus())
         observeStatus()
     }
 
-    public func matchStatus() -> FileStatus {
+    public func anotherStatus() -> FileStatus {
         if avAssetURL() != nil {
             return .downloaded
         } else {
@@ -45,9 +47,21 @@ public class HLSFile {
         }
     }
 
+    public func status(completionHandler: @escaping StatusClosure) {
+        let percent = lastDownloadedPercent
+        let anotherStatus = anotherStatus()
+        fileDownloader.isDownloading(url: url) { isDownloading in
+            if isDownloading {
+                completionHandler(.downloading(percent))
+            } else {
+                completionHandler(anotherStatus)
+            }
+        }
+    }
+
     private func observeStatus() {
         // Do not observe the status if it is downloaded.
-        if case .downloaded = matchStatus() { return }
+        if case .downloaded = anotherStatus() { return }
         // Observes downloaded percent
         NotificationCenter
             .default
@@ -55,6 +69,7 @@ public class HLSFile {
             .compactMap { $0.object as? HLSDownloaderSession.PercentNotification }
             .sink { percentNotification in
                 guard percentNotification.url == self.url else { return }
+                self.lastDownloadedPercent = percentNotification.percent
                 self.fileStatusPublisher.send(.downloading(percentNotification.percent))
             }
             .store(in: &cancelables)
@@ -86,7 +101,7 @@ public class HLSFile {
     ///   - completionHandler: `true` if the file is being downloaded; otherwise `false`
     public func download(title: String = "", completionHandler: CompletionClosure? = nil) {
         // Do not download the file if it was download or downloading
-        if case .downloaded = matchStatus() {
+        if case .downloaded = anotherStatus() {
             completionHandler?(false)
             return
         }
