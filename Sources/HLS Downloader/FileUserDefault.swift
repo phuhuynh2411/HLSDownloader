@@ -67,7 +67,9 @@ public class FileUserDefault: DownloadFileManagerInterface {
     /// - Parameter url: the url returned from the server
     /// - Returns: a local url to the file in user's device or `nil`
     public func playableURL(from url: URL) -> URL? {
-        fileManager.playableURL(from: url)
+        guard let filePath = downloadedFiles[url.absoluteString] else { return nil }
+        let fileURL = URL(fileURLWithPath: filePath)
+        return fileManager.playableURL(from: fileURL)
     }
 
     deinit {
