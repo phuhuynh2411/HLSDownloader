@@ -12,14 +12,14 @@ public class FileUserDefault: DownloadFileManagerInterface {
     /// A key to store the downloaded matches in the user defaults
     private let downloadedFilesKey = "downloadedFilesKey"
     public static let shared = FileUserDefault()
-    let matchFileManager: DownloadFileManagerInterface
+    let fileManager: DownloadFileManagerInterface
 
     init(
         userDefaults: UserDefaults = .standard,
         matchFileManager: DownloadFileManagerInterface = DownloadFileManager()
     ) {
         self.userDefaults = userDefaults
-        self.matchFileManager = matchFileManager
+        self.fileManager = matchFileManager
         load()
     }
 
@@ -50,7 +50,7 @@ public class FileUserDefault: DownloadFileManagerInterface {
 
         guard let filePath = downloadedFiles[url.absoluteString] else { return nil }
         let fileURL = URL(fileURLWithPath: filePath)
-        return matchFileManager.fileLocation(from: fileURL)
+        return fileManager.fileLocation(from: fileURL)
     }
 
     /// Delete a file at url
@@ -58,9 +58,16 @@ public class FileUserDefault: DownloadFileManagerInterface {
     public func deleteFile(at url: URL) throws {
         guard let filePath = downloadedFiles[url.absoluteString] else { return }
         let fileURL = URL(fileURLWithPath: filePath)
-        try matchFileManager.deleteFile(at: fileURL)
+        try fileManager.deleteFile(at: fileURL)
         // Remove the key and value in the downloaded matches dictionary
         downloadedFiles.removeValue(forKey: url.absoluteString)
+    }
+
+    /// Returns a local url to a file in user's device that can be played by the AVPlayer.
+    /// - Parameter url: the url returned from the server
+    /// - Returns: a local url to the file in user's device or `nil`
+    public func playableURL(from url: URL) -> URL? {
+        fileManager.playableURL(from: url)
     }
 
     deinit {
