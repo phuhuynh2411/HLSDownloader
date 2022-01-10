@@ -152,6 +152,11 @@ public class HLSFile {
         try fileUserDefault.deleteFile(at: url)
     }
 
+    /// Returns the playable url in user's device
+    public func playableURL() -> URL? {
+        fileUserDefault.playableURL(from: url)
+    }
+
     deinit {
         print("\(self) deinit")
     }
