@@ -11,7 +11,7 @@ import AVFoundation
 /// A HLSDownloader session
 public class HLSDownloaderSession: NSObject {
     /// The background identifier
-    private let downloadIndentifier = "filesoft.co.background"
+    private let downloadIndentifier = "backgroundDownloadTask"
     /// A notification center
     private let notification: NotificationCenter
     /// A downloader interface
@@ -39,16 +39,21 @@ public class HLSDownloaderSession: NSObject {
 
     /// Downloads HLS file at a url
     /// - Parameters:
-    ///   - url: a url to the .m3u8 file for example: https://dtsprhs5m8oca.cloudfront.net/0/314/fullMatch.m3u8
+    ///   - url: a url to the .m3u8 file
     ///   - title: an asset title
-    public func download(url: URL, title: String = "") {
+    public func download(
+        url: URL,
+        title: String = "",
+        artWorkData: Data? = nil,
+        options: [String : Any]? = nil
+    ) {
         let asset = AVURLAsset(url: url, options: nil)
         // Create new AVAssetDownloadTask for the desired asset
         let downloadTask = session.makeAssetDownloadTask(
             asset: asset,
             assetTitle: title,
-            assetArtworkData: nil,
-            options: nil
+            assetArtworkData: artWorkData,
+            options: options
         )
         downloadTask?.taskDescription = url.absoluteString
         // Start task and begin download

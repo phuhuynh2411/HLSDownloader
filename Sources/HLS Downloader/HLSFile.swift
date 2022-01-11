@@ -99,7 +99,14 @@ public class HLSFile {
     /// - Parameters:
     ///   - title: a title of the file
     ///   - completionHandler: `true` if the file is being downloaded; otherwise `false`
-    public func download(title: String = "", completionHandler: CompletionClosure? = nil) {
+    ///   - artWorkData: Optional artwork data for this asset. The system displays the image in the usage pane of the Settings app.
+    ///   - options: Configures custom behavior on the download task. You must provide an options dictionary to download nondefault media selections for HLS assets.
+    public func download(
+        title: String = "",
+        artWorkData: Data? = nil,
+        options: [String : Any]? = nil,
+        completionHandler: CompletionClosure? = nil
+    ) {
         // Do not download the file if it was download or downloading
         if case .downloaded = anotherStatus() {
             completionHandler?(false)
@@ -109,7 +116,12 @@ public class HLSFile {
         // If the file is downloading, we should do nothing
         fileDownloader.isDownloading(url: url) { [unowned self] isDownloading in
             if !isDownloading {
-                fileDownloader.download(url: url, title: title)
+                fileDownloader.download(
+                    url: url,
+                    title: title,
+                    artWorkData: artWorkData,
+                    options: options
+                )
                 completionHandler?(true)
                 return
             }
